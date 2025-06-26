@@ -53,16 +53,6 @@ class MatchRecord(models.Model):
     def __str__(self):
         return f"Record for {self.player.name} in match {self.match.host_team.name} vs {self.match.guest_team.name}"
 
-    def final_result(self):
-        if self.host_team_score is None or self.guest_team_score is None:
-            return None  # Match not played yet
-        if self.host_team_score > self.guest_team_score:
-            return 'Host Win'
-        elif self.host_team_score < self.guest_team_score:
-            return 'Guest Win'
-        else:
-            return 'Draw'
-
     class Meta:
         # Ensures a player has only one record per match
         unique_together = ('match', 'player')

@@ -22,10 +22,9 @@ class MatchSerializer(serializers.ModelSerializer):
     host_team_name = serializers.StringRelatedField(source='host_team')
     guest_team_name = serializers.StringRelatedField(source='guest_team')
     referee_name = serializers.StringRelatedField(source='referee')
-    final_result = serializers.SerializerMethodField()
     class Meta:
         model = Match
-        fields = ['match_date', 'host_team', 'host_team_name', 'guest_team', 'guest_team_name', 'referee', 'referee_name', 'final_result']
+        fields = ['match_date', 'host_team', 'host_team_name', 'guest_team', 'guest_team_name', 'referee', 'referee_name']
 
     def get_final_result(self, obj):
         return obj.final_result
@@ -35,5 +34,5 @@ class MatchRecordSerializer(serializers.ModelSerializer):
     player_name = serializers.StringRelatedField(source='player')
     class Meta:
         model = MatchRecord
-        fields = ['match', 'match_name', 'player', 'player_name', 'goals_scored', 'yellow_cards', 'red_cards', 'host_team_score', 'guest_team_score', 'final_result']
+        fields = ['match', 'match_name', 'player', 'player_name', 'goals_scored', 'yellow_cards', 'red_cards', 'host_team_score', 'guest_team_score']
 
