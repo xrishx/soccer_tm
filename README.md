@@ -1,2 +1,2 @@
 # soccer_tm
-Sujan's Soccer Team and Matches api
+Soccer Team and Matches api
