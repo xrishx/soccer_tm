@@ -23,6 +23,7 @@ from drf_yasg import openapi
 from django.conf import settings
 from django.conf.urls.static import static
 from api.routers.routers import urlpatterns as api_urlpatterns  # import urlpatterns directly
+# from api.viewsets.api_view import APILogoutView
 # from api.routers.routers import router
 
 schema_view = get_schema_view(
@@ -43,6 +44,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(api_urlpatterns)),
     path('api-auth/', include('rest_framework.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/logout/', APILogoutView.as_view(), name='api_logout'),
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('api', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
