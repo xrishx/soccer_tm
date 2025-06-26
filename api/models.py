@@ -7,7 +7,7 @@ class Team(models.Model):
     name = models.CharField(max_length=100, unique=True, help_text='Name of the team')
     main_stadium = models.CharField(max_length=100, unique=True, help_text='Main stadium of the team')
     city = models.CharField(max_length=100, help_text='City of the stadium')
-    
+        
     def __str__(self):
         return self.name
     
@@ -29,7 +29,7 @@ class Player(models.Model):
     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='players', help_text='Team of the player')
     
     def __str__(self):
-        return f'{self.name} {self.team.name}'
+        return f'{self.name} - {self.team.name}'
 
 class Match(models.Model):
     match_id = models.UUIDField(primary_key=True, default=uuid4, editable=False, help_text='Unique ID for the match')
@@ -44,12 +44,12 @@ class Match(models.Model):
 class MatchRecord(models.Model):
     match = models.ForeignKey(Match, related_name='records', on_delete=models.CASCADE)
     player = models.ForeignKey(Player, related_name= 'match_records', on_delete=models.CASCADE)
-    goals_scored = models.IntegerField(default=0)
-    yellow_cards = models.IntegerField(default=0)
-    red_cards = models.IntegerField(default=0)
+    goals_scored = models.PositiveIntegerField(default=0)
+    yellow_cards = models.PositiveIntegerField(default=0)
+    red_cards = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return f"Record for {self.player.name} in match {self.match.match_id}"
+        return f"Record for {self.player.name} in match {self.match.host_team.name} vs {self.match.guest_team.name}"
 
     class Meta:
         # Ensures a player has only one record per match

@@ -2,6 +2,7 @@ from rest_framework import serializers
 from ..models import Player, Team, Match, Referee, MatchRecord
 
 class TeamSerializer(serializers.ModelSerializer):
+    players = serializers.StringRelatedField(many=True, read_only=True)
     class Meta:
         model = Team
         fields = ['name', 'main_stadium', 'city', 'players']
@@ -26,7 +27,9 @@ class MatchSerializer(serializers.ModelSerializer):
         fields = ['match_date', 'host_team', 'host_team_name', 'guest_team', 'guest_team_name', 'referee', 'referee_name']
 
 class MatchRecordSerializer(serializers.ModelSerializer):
+    match_name = serializers.StringRelatedField(source='match')
+    player_name = serializers.StringRelatedField(source='player')
     class Meta:
         model = MatchRecord
-        fields = ['match','goals_scored', 'yellow_cards', 'red_cards']
+        fields = ['match', 'match_name', 'player', 'player_name', 'goals_scored', 'yellow_cards', 'red_cards']
 
