@@ -22,9 +22,8 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.conf import settings
 from django.conf.urls.static import static
-from api.routers.routers import urlpatterns as api_urlpatterns  # import urlpatterns directly
+from api.routers.routers import urlpatterns as api_urlpatterns  # import urlpatterns directly fro routers directory
 # from api.viewsets.api_view import APILogoutView
-# from api.routers.routers import router
 
 schema_view = get_schema_view(
     openapi.Info(
